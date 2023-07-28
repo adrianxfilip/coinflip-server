@@ -10,30 +10,29 @@ app.use(cors());
 
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: "http://buratancunebunu.home.ro:3000",
+    origin: "*",
   },
 });
 
 socketIO.on("connection", (socket) => {
   socket.emit("rooms", rooms);
-  socket.emit("connected")
+  socket.emit("connected");
 
   socket.on("disconnect", () => {
-    delete rooms[socket.id]
-    socketIO.emit("rooms", rooms)
+    delete rooms[socket.id];
+    socketIO.emit("rooms", rooms);
   });
 
   socket.on("create-room", (roomData) => {
     rooms = {
       ...rooms,
       [socket.id]: {
-        betAmount : roomData.betAmount,
-        participants : [socket.id]
+        betAmount: roomData.betAmount,
+        players: { [socket.id] : { side: roomData.side }},
       },
     };
     socketIO.emit("rooms", rooms);
   });
-
 });
 
 app.get("/", (req, res) => {
