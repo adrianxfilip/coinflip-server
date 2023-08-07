@@ -150,7 +150,10 @@ socketIO.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     Object.keys(rooms).forEach((key) => {
-      if (rooms[key].playerOne.id == socket.id && rooms[key].status != "ongoing") {
+      if (
+        rooms[key].playerOne.id == socket.id &&
+        rooms[key].status != "ongoing"
+      ) {
         rooms[key] = {
           playerOne: {
             id: "",
@@ -173,18 +176,18 @@ socketIO.on("connection", (socket) => {
     Object.keys(rooms).every((key) => {
       if (rooms[key].status == "closed") {
         rooms[key] = {
-            playerOne: {
-              id: socket.id,
-              side: roomData.side,
-            },
-            playerTwo: {
-              id: "",
-              side: "",
-            },
-            bet: roomData.betAmount,
-            status: "waiting",
-            winningSide: "",
-        }
+          playerOne: {
+            id: socket.id,
+            side: roomData.side,
+          },
+          playerTwo: {
+            id: "",
+            side: "",
+          },
+          bet: roomData.betAmount,
+          status: "waiting",
+          winningSide: "",
+        };
         return false;
       }
       return true;
@@ -193,17 +196,30 @@ socketIO.on("connection", (socket) => {
   });
 
   socket.on("join-room", (roomID) => {
+    const winningSide = Math.random() < 0.5 ? "heads" : "tails";
     rooms[roomID] = {
-        ...rooms[roomID],
-        playerTwo: {
-          id: socket.id,
-          side: rooms[roomID].playerOne.side == "heads" ? "tails" : "heads",
-        },
-        status: "ongoing",
-        winningSide: Math.random() < 0.5 ? "heads" : "tails",
-      }
+      ...rooms[roomID],
+      playerTwo: {
+        id: socket.id,
+        side: rooms[roomID].playerOne.side == "heads" ? "tails" : "heads",
+      },
+      status: "ongoing",
+      winningSide: winningSide,
+    };
+    var balancePlayerTwo =
+      winningSide != rooms[roomID].playerTwo.side
+        ? rooms[roomID].bet * -1
+        : rooms[roomID].bet - (10 / 100) * rooms[roomID].bet;
+    var balancePlayerOne =
+      winningSide != rooms[roomID].playerOne.side
+        ? rooms[roomID].bet * -1
+        : rooms[roomID].bet - (10 / 100) * rooms[roomID].bet;
+        console.log(rooms[roomID])
+      console.log(balancePlayerOne)
     socketIO.emit("rooms", rooms);
     setTimeout(() => {
+      socketIO.to(rooms[roomID].playerTwo.id).emit("balanceUpdate", balancePlayerTwo)
+      socketIO.to(rooms[roomID].playerOne.id).emit("balanceUpdate", balancePlayerOne)
       rooms[roomID] = {
         playerOne: {
           id: "",
@@ -215,8 +231,8 @@ socketIO.on("connection", (socket) => {
         },
         bet: 0,
         status: "closed",
-        winningSide: ""
-      }
+        winningSide: "",
+      };
       socketIO.emit("rooms", rooms);
     }, 5000);
   });
