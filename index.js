@@ -149,11 +149,13 @@ socketIO.on("connection", (socket) => {
   socket.emit("connected", rooms, socket.id);
 
   socket.on("disconnect", () => {
+    var returnAmount = 0;
     Object.keys(rooms).forEach((key) => {
       if (
         rooms[key].playerOne.id == socket.id &&
         rooms[key].status != "ongoing"
       ) {
+        returnAmount += rooms[key].bet
         rooms[key] = {
           playerOne: {
             id: "",
@@ -170,9 +172,11 @@ socketIO.on("connection", (socket) => {
       }
     });
     socketIO.emit("rooms", rooms);
+    socket.emit("balanceUpdate", returnAmount)
   });
 
   socket.on("create-room", (roomData) => {
+    var newBalance = 0
     Object.keys(rooms).every((key) => {
       if (rooms[key].status == "closed") {
         rooms[key] = {
@@ -188,10 +192,12 @@ socketIO.on("connection", (socket) => {
           status: "waiting",
           winningSide: "",
         };
+        newBalance = roomData.betAmount * -1;
         return false;
       }
       return true;
     });
+    socket.emit("balanceUpdate", newBalance);
     socketIO.emit("rooms", rooms);
   });
 
@@ -206,20 +212,23 @@ socketIO.on("connection", (socket) => {
       status: "ongoing",
       winningSide: winningSide,
     };
+    socket.emit("balanceUpdate", rooms[roomID].bet * -1)
+    var balancePlayerOne =
+    winningSide != rooms[roomID].playerOne.side
+      ? 0
+      : rooms[roomID].bet * 2 - (10 / 100) * rooms[roomID].bet;
     var balancePlayerTwo =
       winningSide != rooms[roomID].playerTwo.side
-        ? rooms[roomID].bet * -1
-        : rooms[roomID].bet - (10 / 100) * rooms[roomID].bet;
-    var balancePlayerOne =
-      winningSide != rooms[roomID].playerOne.side
-        ? rooms[roomID].bet * -1
-        : rooms[roomID].bet - (10 / 100) * rooms[roomID].bet;
-        console.log(rooms[roomID])
-      console.log(balancePlayerOne)
+        ? 0
+        : rooms[roomID].bet * 2 - (10 / 100) * rooms[roomID].bet;
     socketIO.emit("rooms", rooms);
     setTimeout(() => {
-      socketIO.to(rooms[roomID].playerTwo.id).emit("balanceUpdate", balancePlayerTwo)
-      socketIO.to(rooms[roomID].playerOne.id).emit("balanceUpdate", balancePlayerOne)
+      socketIO
+        .to(rooms[roomID].playerTwo.id)
+        .emit("balanceUpdate", balancePlayerTwo);
+      socketIO
+        .to(rooms[roomID].playerOne.id)
+        .emit("balanceUpdate", balancePlayerOne);
       rooms[roomID] = {
         playerOne: {
           id: "",
@@ -234,7 +243,7 @@ socketIO.on("connection", (socket) => {
         winningSide: "",
       };
       socketIO.emit("rooms", rooms);
-    }, 5000);
+    }, 3500);
   });
 });
 
