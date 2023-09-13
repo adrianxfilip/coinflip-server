@@ -137,6 +137,9 @@ var rooms = {
   },
 };
 
+var chat = [{name : 'Dorian', message : 'georgiana_fr zice "Belesti pula". Mai fetito? Cum vorbesti asa?'}, {name : 'georgiana_fr', message : 'Belesti pula'}]
+
+
 app.use(cors());
 
 const socketIO = require("socket.io")(http, {
@@ -146,7 +149,7 @@ const socketIO = require("socket.io")(http, {
 });
 
 socketIO.on("connection", (socket) => {
-  socket.emit("connected", rooms, socket.id);
+  socket.emit("connected", rooms, chat, socket.id, socketIO.engine.clientsCount);
 
   socket.on("disconnect", () => {
     var returnAmount = 0;
