@@ -137,7 +137,7 @@ var rooms = {
   },
 };
 
-var chat = [{name : 'Dorian', message : 'georgiana_fr zice "Belesti pula". Mai fetito? Cum vorbesti asa?'}, {name : 'georgiana_fr', message : 'Belesti pula'}]
+var chat = []
 
 
 app.use(cors());
@@ -149,7 +149,8 @@ const socketIO = require("socket.io")(http, {
 });
 
 socketIO.on("connection", (socket) => {
-  socket.emit("connected", rooms, chat, socket.id, socketIO.engine.clientsCount);
+  socket.emit("connected", rooms, chat, socket.id);
+  socketIO.emit("clients-count-update", socketIO.engine.clientsCount)
 
   socket.on("disconnect", () => {
     var returnAmount = 0;
@@ -175,6 +176,7 @@ socketIO.on("connection", (socket) => {
       }
     });
     socketIO.emit("rooms", rooms);
+    socketIO.emit("clients-count-update", socketIO.engine.clientsCount)
     socket.emit("balanceUpdate", returnAmount)
   });
 
@@ -248,6 +250,14 @@ socketIO.on("connection", (socket) => {
       socketIO.emit("rooms", rooms);
     }, 3500);
   });
+
+  socket.on("new-message", (messageData) => {
+    chat.unshift({name : messageData.name, message : messageData.message})
+    if(chat.length > 30){
+      chat.splice(30, 1)
+    }
+    socketIO.emit("chat-update", chat)
+  })
 });
 
 app.get("/", (req, res) => {
