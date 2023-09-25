@@ -193,11 +193,11 @@ socketIO.on("connection", (socket) => {
             id: "",
             side: "",
           },
-          bet: roomData.betAmount,
+          bet: parseFloat(roomData.betAmount).toFixed(2),
           status: "waiting",
           winningSide: "",
         };
-        newBalance = roomData.betAmount * -1;
+        newBalance = parseFloat(roomData.betAmount).toFixed(2) * -1;
         return false;
       }
       return true;
@@ -207,7 +207,8 @@ socketIO.on("connection", (socket) => {
   });
 
   socket.on("join-room", (roomID) => {
-    const winningSide = Math.random() < 0.5 ? "heads" : "tails";
+    const sides = ["heads", "tails"]
+    const winningSide = sides[(Math.floor(Math.random() * sides.length))];
     rooms[roomID] = {
       ...rooms[roomID],
       playerTwo: {
