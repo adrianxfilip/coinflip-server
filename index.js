@@ -182,7 +182,14 @@ socketIO.on("connection", (socket) => {
 
   socket.on("create-room", (roomData) => {
     var newBalance = 0
+    var roomCount = 0
     Object.keys(rooms).every((key) => {
+      if (rooms[key].playerOne.id == socket.id){
+        roomCount = roomCount + 1
+        if(roomCount >= 5){
+          return false
+        }
+      }
       if (rooms[key].status == "closed") {
         rooms[key] = {
           playerOne: {
@@ -202,8 +209,10 @@ socketIO.on("connection", (socket) => {
       }
       return true;
     });
-    socket.emit("balanceUpdate", newBalance);
-    socketIO.emit("rooms", rooms);
+    if(roomCount <=5 ){
+      socket.emit("balanceUpdate", newBalance);
+      socketIO.emit("rooms", rooms);
+    }
   });
 
   socket.on("join-room", (roomID) => {
