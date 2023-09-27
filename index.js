@@ -139,7 +139,6 @@ var rooms = {
 
 var chat = []
 
-
 app.use(cors());
 
 const socketIO = require("socket.io")(http, {
