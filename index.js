@@ -135,6 +135,526 @@ var rooms = {
     status: "closed",
     winningSide: "",
   },
+  room11: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room12: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room13: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room14: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room15: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room16: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room17: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room18: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room19: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room20: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room21: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room22: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room23: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room24: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room25: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room26: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room27: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room28: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room29: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room30: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room31: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room32: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room33: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room34: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room35: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room36: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room37: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room38: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room39: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room40: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room41: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room42: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room43: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room44: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room45: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room46: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room47: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room48: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room49: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  },
+  room50: {
+    playerOne: {
+      id: "",
+      side: "",
+    },
+    playerTwo: {
+      id: "",
+      side: "",
+    },
+    bet: 0,
+    status: "closed",
+    winningSide: "",
+  }
 };
 
 var chat = []
