@@ -714,10 +714,12 @@ socketIO.on("connection", (socket) => {
           playerOne: {
             id: socket.id,
             side: roomData.side,
+            name: roomData.userData.name
           },
           playerTwo: {
             id: "",
             side: "",
+            name : ""
           },
           bet: parseFloat(roomData.betAmount).toFixed(2),
           status: "waiting",
@@ -734,7 +736,9 @@ socketIO.on("connection", (socket) => {
     }
   });
 
-  socket.on("join-room", (roomID) => {
+  socket.on("join-room", (roomData) => {
+    roomID = roomData.roomID
+    userData = roomData.userData
     const sides = ["heads", "tails"]
     const winningSide = sides[(Math.floor(Math.random() * sides.length))];
     rooms[roomID] = {
@@ -742,6 +746,7 @@ socketIO.on("connection", (socket) => {
       playerTwo: {
         id: socket.id,
         side: rooms[roomID].playerOne.side == "heads" ? "tails" : "heads",
+        name: userData.name
       },
       status: "ongoing",
       winningSide: winningSide,
