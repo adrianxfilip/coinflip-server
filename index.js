@@ -654,27 +654,22 @@ var rooms = {
     bet: 0,
     status: "closed",
     winningSide: "",
-  }
+  },
 };
 
-var chat = []
+var chat = [];
 
 app.use(cors());
 
-app.use((req, res, next) => {
-  res.header({"Access-Control-Allow-Origin": "*"});
-  next();
-}) 
-
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: "*"
+    origin: "*",
   },
 });
 
 socketIO.on("connection", (socket) => {
   socket.emit("connected", rooms, chat, socket.id);
-  socketIO.emit("clients-count-update", socketIO.engine.clientsCount)
+  socketIO.emit("clients-count-update", socketIO.engine.clientsCount);
 
   socket.on("disconnect", () => {
     var returnAmount = 0;
@@ -683,7 +678,7 @@ socketIO.on("connection", (socket) => {
         rooms[key].playerOne.id == socket.id &&
         rooms[key].status != "ongoing"
       ) {
-        returnAmount += rooms[key].bet
+        returnAmount += rooms[key].bet;
         rooms[key] = {
           playerOne: {
             id: "",
@@ -700,18 +695,18 @@ socketIO.on("connection", (socket) => {
       }
     });
     socketIO.emit("rooms", rooms);
-    socketIO.emit("clients-count-update", socketIO.engine.clientsCount)
-    socket.emit("balanceUpdate", returnAmount)
+    socketIO.emit("clients-count-update", socketIO.engine.clientsCount);
+    socket.emit("balanceUpdate", returnAmount);
   });
 
   socket.on("create-room", (roomData) => {
-    var newBalance = 0
-    var roomCount = 0
+    var newBalance = 0;
+    var roomCount = 0;
     Object.keys(rooms).every((key) => {
-      if (rooms[key].playerOne.id == socket.id){
-        roomCount = roomCount + 1
-        if(roomCount >= 5){
-          return false
+      if (rooms[key].playerOne.id == socket.id) {
+        roomCount = roomCount + 1;
+        if (roomCount >= 5) {
+          return false;
         }
       }
       if (rooms[key].status == "closed") {
@@ -719,12 +714,12 @@ socketIO.on("connection", (socket) => {
           playerOne: {
             id: socket.id,
             side: roomData.side,
-            name: roomData.userData.name
+            name: roomData.userData.name,
           },
           playerTwo: {
             id: "",
             side: "",
-            name : ""
+            name: "",
           },
           bet: parseFloat(roomData.betAmount).toFixed(2),
           status: "waiting",
@@ -735,32 +730,32 @@ socketIO.on("connection", (socket) => {
       }
       return true;
     });
-    if(roomCount <=5 ){
+    if (roomCount <= 5) {
       socket.emit("balanceUpdate", newBalance);
       socketIO.emit("rooms", rooms);
     }
   });
 
   socket.on("join-room", (roomData) => {
-    roomID = roomData.roomID
-    userData = roomData.userData
-    const sides = ["heads", "tails"]
-    const winningSide = sides[(Math.floor(Math.random() * sides.length))];
+    roomID = roomData.roomID;
+    userData = roomData.userData;
+    const sides = ["heads", "tails"];
+    const winningSide = sides[Math.floor(Math.random() * sides.length)];
     rooms[roomID] = {
       ...rooms[roomID],
       playerTwo: {
         id: socket.id,
         side: rooms[roomID].playerOne.side == "heads" ? "tails" : "heads",
-        name: userData.name
+        name: userData.name,
       },
       status: "ongoing",
       winningSide: winningSide,
     };
-    socket.emit("balanceUpdate", rooms[roomID].bet * -1)
+    socket.emit("balanceUpdate", rooms[roomID].bet * -1);
     var balancePlayerOne =
-    winningSide != rooms[roomID].playerOne.side
-      ? 0
-      : rooms[roomID].bet * 2 - (10 / 100) * rooms[roomID].bet;
+      winningSide != rooms[roomID].playerOne.side
+        ? 0
+        : rooms[roomID].bet * 2 - (10 / 100) * rooms[roomID].bet;
     var balancePlayerTwo =
       winningSide != rooms[roomID].playerTwo.side
         ? 0
@@ -791,12 +786,12 @@ socketIO.on("connection", (socket) => {
   });
 
   socket.on("new-message", (messageData) => {
-    chat.unshift({name : messageData.name, message : messageData.message})
-    if(chat.length > 30){
-      chat.splice(30, 1)
+    chat.unshift({ name: messageData.name, message: messageData.message });
+    if (chat.length > 30) {
+      chat.splice(30, 1);
     }
-    socketIO.emit("chat-update", chat)
-  })
+    socketIO.emit("chat-update", chat);
+  });
 });
 
 app.get("/", (req, res) => {
