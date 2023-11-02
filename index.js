@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 4000;
 const http = require("http").Server(app);
 const cors = require("cors");
 
@@ -795,10 +795,11 @@ socketIO.on("connection", (socket) => {
 });
 
 app.get("/", (req, res) => {
-  res.json({
-    message: "Hello world",
-  });
+  res.sendFile(__dirname + "/views/index.html");
 });
+
+app.use(express.static("public"));
+app.use("/views", express.static(__dirname + "/views"));
 
 http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
