@@ -662,13 +662,13 @@ var chat = []
 app.use(cors());
 
 app.use((req, res, next) => {
-  res.header({"Access-Control-Allow-Origin": "https://adrianxfilip.github.io"});
+  res.header({"Access-Control-Allow-Origin": "*"});
   next();
 }) 
 
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: "https://adrianxfilip.github.io"
+    origin: "*"
   },
 });
 
