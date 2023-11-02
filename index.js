@@ -663,7 +663,7 @@ app.use(cors());
 
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: "*",
+    origin: "https://adrianxfilip.github.io",
   },
 });
 
