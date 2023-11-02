@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = 4000;
+const PORT = 8080;
 const http = require("http").Server(app);
 const cors = require("cors");
 
@@ -661,11 +661,14 @@ var chat = []
 
 app.use(cors());
 
+app.use((req, res, next) => {
+  res.header({"Access-Control-Allow-Origin": "*"});
+  next();
+}) 
+
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-    transports: ['websocket', 'polling', 'flashsocket']
+    origin: "*"
   },
 });
 
