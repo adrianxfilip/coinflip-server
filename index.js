@@ -669,18 +669,15 @@ const socketIO = require("socket.io")(http, {
 
 socketIO.on("connection", (socket) => {
   socket.emit("connected", rooms, chat, socketIO.engine.clientsCount, socket.id);
-  socketIO.emit("clients-count-update", socketIO.engine.clientsCount);
+  socketIO.emit("connected-users-update", socketIO.engine.clientsCount);
 
   socket.on("disconnect", () => {
-    // returnAmount to be set
-    //var returnAmount = 0;
-    Object.keys(rooms).forEach((key) => {
+    Object.keys(rooms).forEach((room) => {
       if (
-        rooms[key].playerOne.id == socket.id &&
-        rooms[key].status != "ongoing"
+        rooms[room].playerOne.id == socket.id &&
+        rooms[room].status != "ongoing"
       ) {
-        //returnAmount += rooms[key].bet;
-        rooms[key] = {
+        rooms[room] = {
           playerOne: {
             id: "",
             side: "",
@@ -693,11 +690,11 @@ socketIO.on("connection", (socket) => {
           status: "closed",
           winningSide: "",
         };
+        socketIO.to(rooms[room].playerTwo.id).emit("balance-return", returnAmount);
       }
     });
-    socketIO.emit("rooms", rooms);
-    socketIO.emit("clients-count-update", socketIO.engine.clientsCount);
-    //socket.emit("balanceUpdate", returnAmount);
+    socketIO.emit("rooms-update", rooms);
+    socketIO.emit("connected-users-update", socketIO.engine.clientsCount);
   });
 
   socket.on("create-room", (roomData) => {
