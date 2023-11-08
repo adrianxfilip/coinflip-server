@@ -668,17 +668,18 @@ const socketIO = require("socket.io")(http, {
 });
 
 socketIO.on("connection", (socket) => {
-  socket.emit("connected", rooms, chat, socket.id);
+  socket.emit("connected", rooms, chat, socketIO.engine.clientsCount, socket.id);
   socketIO.emit("clients-count-update", socketIO.engine.clientsCount);
 
   socket.on("disconnect", () => {
-    var returnAmount = 0;
+    // returnAmount to be set
+    //var returnAmount = 0;
     Object.keys(rooms).forEach((key) => {
       if (
         rooms[key].playerOne.id == socket.id &&
         rooms[key].status != "ongoing"
       ) {
-        returnAmount += rooms[key].bet;
+        //returnAmount += rooms[key].bet;
         rooms[key] = {
           playerOne: {
             id: "",
@@ -696,7 +697,7 @@ socketIO.on("connection", (socket) => {
     });
     socketIO.emit("rooms", rooms);
     socketIO.emit("clients-count-update", socketIO.engine.clientsCount);
-    socket.emit("balanceUpdate", returnAmount);
+    //socket.emit("balanceUpdate", returnAmount);
   });
 
   socket.on("create-room", (roomData) => {
@@ -782,11 +783,11 @@ socketIO.on("connection", (socket) => {
         winningSide: "",
       };
       socketIO.emit("rooms", rooms);
-    }, 3500);
+    }, 5000);
   });
 
   socket.on("new-message", (messageData) => {
-    chat.unshift({ name: messageData.name, message: messageData.message });
+    chat.unshift({ username: messageData.username, message: messageData.message });
     if (chat.length > 30) {
       chat.splice(30, 1);
     }
