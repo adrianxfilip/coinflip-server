@@ -4,657 +4,83 @@ const PORT = process.env.PORT || 4000;
 const http = require("http").Server(app);
 const cors = require("cors");
 
+var roomTemplate = {    
+  playerOne: {
+    socketID: "",
+    playerID: "",
+    side: "",
+  },
+  playerTwo: {
+    socketID: "",
+    playerID: "",
+    side: "",
+  },
+  bet: 0,
+  status: "closed",
+  winningSide: ""
+}
+
 var rooms = {
   room1: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room2: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room3: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room4: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room5: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room6: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room7: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room8: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room9: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room10: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room11: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room12: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room13: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room14: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room15: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room16: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room17: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room18: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room19: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
+    ...roomTemplate
   },
   room20: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room21: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room22: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room23: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room24: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room25: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room26: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room27: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room28: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room29: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room30: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room31: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room32: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room33: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room34: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room35: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room36: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room37: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room38: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room39: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room40: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room41: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room42: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room43: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room44: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room45: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room46: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room47: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room48: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room49: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
-  room50: {
-    playerOne: {
-      id: "",
-      side: "",
-    },
-    playerTwo: {
-      id: "",
-      side: "",
-    },
-    bet: 0,
-    status: "closed",
-    winningSide: "",
-  },
+    ...roomTemplate
+  }
 };
 
 var chat = [];
@@ -669,68 +95,53 @@ const socketIO = require("socket.io")(http, {
 
 socketIO.on("connection", (socket) => {
   socket.emit("connected", rooms, chat, socketIO.engine.clientsCount, socket.id);
-  socketIO.emit("connected-users-update", socketIO.engine.clientsCount);
+  socket.broadcast.emit("connected-users-update", socketIO.engine.clientsCount);
 
   socket.on("disconnect", () => {
     Object.keys(rooms).forEach((room) => {
       if (
-        rooms[room].playerOne.id == socket.id &&
+        rooms[room].playerOne.socketID == socket.id &&
         rooms[room].status != "ongoing"
       ) {
         rooms[room] = {
-          playerOne: {
-            id: "",
-            side: "",
-          },
-          playerTwo: {
-            id: "",
-            side: "",
-          },
-          bet: 0,
-          status: "closed",
-          winningSide: "",
+          ...roomTemplate
         };
-        socketIO.to(rooms[room].playerTwo.id).emit("balance-return", returnAmount);
       }
     });
-    socketIO.emit("rooms-update", rooms);
-    socketIO.emit("connected-users-update", socketIO.engine.clientsCount);
+    socket.broadcast.emit("rooms-update", rooms);
+    socket.broadcast.emit("connected-users-update", socketIO.engine.clientsCount);
   });
 
-  socket.on("create-room", (roomData) => {
-    var newBalance = 0;
+  socket.on("create-room", (betData, userData) => {
+    // for future update - current system allows for more than 5 rooms per player if there are closed rooms before the users open rooms 
+    console.log(betData,userData)
     var roomCount = 0;
-    Object.keys(rooms).every((key) => {
-      if (rooms[key].playerOne.id == socket.id) {
+    Object.keys(rooms).every((room) => {
+      if (rooms[room].playerOne.socketID == socket.id) {
         roomCount = roomCount + 1;
         if (roomCount >= 5) {
           return false;
         }
       }
-      if (rooms[key].status == "closed") {
-        rooms[key] = {
+      if (rooms[room].status == "closed") {
+        rooms[room] = {
+          ...rooms[room],
           playerOne: {
-            id: socket.id,
-            side: roomData.side,
-            name: roomData.userData.name,
+            playerID: userData.playerID,
+            socketID : socket.id,
+            side: betData.selectedSide,
+            name: userData.name,
           },
-          playerTwo: {
-            id: "",
-            side: "",
-            name: "",
-          },
-          bet: parseFloat(roomData.betAmount).toFixed(2),
-          status: "waiting",
-          winningSide: "",
+          bet: parseFloat(betData.betAmount).toFixed(2),
+          status: "waiting"
         };
-        newBalance = parseFloat(roomData.betAmount).toFixed(2) * -1;
         return false;
       }
       return true;
     });
     if (roomCount <= 5) {
-      socket.emit("balanceUpdate", newBalance);
-      socketIO.emit("rooms", rooms);
+      socket.emit("balance-update", parseFloat(betData.betAmount).toFixed(2) * -1);
+      socketIO.emit("rooms-update", rooms);
     }
   });
 
@@ -790,6 +201,7 @@ socketIO.on("connection", (socket) => {
     }
     socketIO.emit("chat-update", chat);
   });
+
 });
 
 app.get("/", (req, res) => {
