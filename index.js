@@ -187,7 +187,7 @@ socketIO.on("connection", (socket) => {
         ...roomTemplate
       };
       socketIO.emit("rooms-update", rooms);
-    }, 5000);
+    }, 7000);
   });
 
   socket.on("new-message", (messageData) => {
